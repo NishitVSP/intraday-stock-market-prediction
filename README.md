@@ -4,7 +4,7 @@ This web application uses LSTM neural networks and sentiment analysis of news to
 
 ## Features
 
-* Predict stock prices for the current day using historical data from the last 30 days
+* Predict stock prices for the current day using historical data from the last 365 days
 * Incorporate sentiment analysis from news related to the company
 * Interactive web interface to input ticker symbol and company name
 * Visualize predictions with charts and tables
