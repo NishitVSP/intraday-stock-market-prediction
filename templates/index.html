@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction with Sentiment Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Stock Price Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+                        
+                        <form action="{{ url_for('predict') }}" method="post" id="prediction-form">
+                            <div class="mb-3">
+                                <label for="ticker" class="form-label">Stock Ticker Symbol</label>
+                                <input type="text" class="form-control" id="ticker" name="ticker" 
+                                       placeholder="e.g., TATAMOTORS.NS, RELIANCE.NS, INFY.NS" 
+                                       value="{{ default_ticker }}" required>
+                                <div class="form-text">Use .NS suffix for NSE stocks (Indian stocks), or use standard symbols for other exchanges.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="company_keyword" class="form-label">Company Name for News Search</label>
+                                <input type="text" class="form-control" id="company_keyword" name="company_keyword" 
+                                       placeholder="e.g., Tata Motors, Reliance Industries, Infosys" 
+                                       value="{{ default_company }}" required>
+                                <div class="form-text">This will be used to search for news articles related to the company.</div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary" id="submit-btn">Generate Prediction</button>
+                            </div>
+                        </form>
+                        
+                        <!-- Loading overlay -->
+                        <div id="loading-overlay" class="d-none">
+                            <div class="text-center p-4">
+                                <div class="spinner-border text-primary mb-3" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <h5>Please wait</h5>
+                                <p class="waiting-text">The model is being created in the background<span class="dots">...</span></p>
+                                <p class="text-muted small mt-3">This may take a few minutes depending on the amount of data</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h5>How it works:</h5>
+                            <ol>
+                                <li>Enter a valid stock ticker symbol and the company name</li>
+                                <li>The system fetches stock data for the last 365 days</li>
+                                <li>News articles related to the company are collected and analyzed for sentiment</li>
+                                <li>An LSTM model combines price and sentiment data to predict stock prices for today's or tomorrow's market hours</li>
+                                <li>Results are displayed as charts and tables</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(e) {
+            // Show loading overlay
+            document.getElementById('loading-overlay').classList.remove('d-none');
+            document.getElementById('submit-btn').disabled = true;
+            
+            // Animate the dots
+            const dots = document.querySelector('.dots');
+            let dotCount = 3;
+            const dotAnimation = setInterval(function() {
+                dots.textContent = '.'.repeat(dotCount);
+                dotCount = (dotCount % 3) + 1;  // Cycle between 1, 2, and 3 dots
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

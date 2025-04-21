@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="mb-0">Prediction Results for {{ result.ticker }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h4>Stock: {{ result.ticker }}</h4>
+                            <h5>Company: {{ result.company_keyword }}</h5>
+                            <p class="text-muted">Prediction Date: {{ result.prediction_date }}</p>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h5>Predicted Stock Prices for Today (Market Hours)</h5>
+                                <div class="img-container">
+                                    <img src="{{ url_for('static', filename=result.prediction_plot) }}" 
+                                         class="img-fluid rounded" alt="Prediction Chart">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h5>Predictions Table</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Predicted Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for time, value in result.predictions.get('Predicted Price', {}).items() %}
+                                            <tr>
+                                                <td>{{ time }}</td>
+                                                <td>{{ value|round(2) }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <a href="{{ url_for('home') }}" class="btn btn-primary">Make Another Prediction</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
