@@ -82,8 +82,8 @@ This project is provided for our data science project.
 * This application is for our data science project and should not be used for actual investment decisions
 
 ## Group NUMBER 17 : 
-Member 1 : Nishit Prajapati
-Member 2 : Mitansh Patel
-Member 3 : Hardik Khobragade
-Member 4  : Ekansh Somani
-![image](https://github.com/user-attachments/assets/b6dbdd47-7799-44a2-904f-2d532c7afd64)
+* Member 1 : Nishit Prajapati
+* Member 2 : Mitansh Patel
+* Member 3 : Hardik Khobragade
+* Member 4  : Ekansh Somani
+
