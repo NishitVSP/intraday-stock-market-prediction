@@ -82,8 +82,8 @@ This project is provided for our data science project.
 * This application is for our data science project and should not be used for actual investment decisions
 
 ## Group NUMBER 17 : 
-* Member 1 : Nishit Prajapati
-* Member 2 : Mitansh Patel
-* Member 3 : Hardik Khobragade
-* Member 4  : Ekansh Somani
+* Member 1 : Nishit Prajapati - nishit.prajapati@iitgn.ac.in
+* Member 2 : Mitansh Patel - mitansh.patel@iitgn.ac.in
+* Member 3 : Hardik Khobragade - hardik.k@iitgn.ac.in
+* Member 4  : Ekansh Somani - ekansh.somani@iitgn.ac.in
 
